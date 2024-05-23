@@ -70,7 +70,7 @@ export default function LoginForm() {
           type='email'
           placeholder='Email'
           required
-          errors={state.errors?.email}
+          errors={state.errors?.fieldErrors.email}
           disabled={state.isLoginTrue}
         >
           {emailIcon}
@@ -80,7 +80,7 @@ export default function LoginForm() {
           type='text'
           placeholder='Username'
           required
-          errors={state.errors?.username}
+          errors={state.errors?.fieldErrors.username}
           disabled={state.isLoginTrue}
         >
           {userIcon}
@@ -90,7 +90,7 @@ export default function LoginForm() {
           type='password'
           placeholder='Password'
           required
-          errors={state.errors?.password}
+          errors={state.errors?.fieldErrors.password}
           disabled={state.isLoginTrue}
         >
           {passwordIcon}
