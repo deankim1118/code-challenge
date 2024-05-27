@@ -4,16 +4,12 @@ import { useFormStatus } from 'react-dom';
 
 interface IButtonProps {
   text: string;
-  disabled: boolean;
 }
 
-export default function Button({ text, disabled }: IButtonProps) {
+export default function Button({ text }: IButtonProps) {
   const { pending } = useFormStatus();
   return (
-    <button
-      disabled={disabled || pending}
-      className='w-full bg-orange-500 text-white font-medium rounded-full text-center hover:bg-orange-400 transition-colors; h-10 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed'
-    >
+    <button className='p-4 flex justify-center items-center w-full bg-orange-500 text-white font-medium rounded-full hover:bg-orange-400 transition-colors; h-10 disabled:bg-neutral-400 disabled:text-neutral-300 disabled:cursor-not-allowed'>
       {pending ? 'Loading...' : text}
     </button>
   );

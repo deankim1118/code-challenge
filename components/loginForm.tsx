@@ -1,14 +1,12 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-import { login } from './action-loginForm';
+import { login } from '../app/login/action';
 import Input from '@/components/input';
 import Button from '@/components/button';
 
-const initialState = { isLoginTrue: false, errors: undefined };
-
 export default function LoginForm() {
-  const [state, dispatch] = useFormState(login, initialState);
+  const [state, dispatch] = useFormState(login, null);
   const emailIcon = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -59,7 +57,7 @@ export default function LoginForm() {
   );
 
   return (
-    <div className=' flex flex-col gap-2 items-center justify-center max-h-[640px] max-w-[640px] w-full'>
+    <div className=' flex flex-col gap-2 items-center justify-center  max-w-[640px] h-screen mx-auto'>
       <h1 className='text-6xl'>🔥</h1>
       <form
         action={dispatch}
@@ -70,53 +68,20 @@ export default function LoginForm() {
           type='email'
           placeholder='Email'
           required
-          errors={state.errors?.fieldErrors.email}
-          disabled={state.isLoginTrue}
+          errors={state?.fieldErrors.email}
         >
           {emailIcon}
-        </Input>
-        <Input
-          name='username'
-          type='text'
-          placeholder='Username'
-          required
-          errors={state.errors?.fieldErrors.username}
-          disabled={state.isLoginTrue}
-        >
-          {userIcon}
         </Input>
         <Input
           name='password'
           type='password'
           placeholder='Password'
           required
-          errors={state.errors?.fieldErrors.password}
-          disabled={state.isLoginTrue}
+          errors={state?.fieldErrors.password}
         >
           {passwordIcon}
         </Input>
-        <Button text='Login' disabled={state.isLoginTrue} />
-        {state.isLoginTrue ? (
-          <div className='flex gap-4 bg-green-500 rounded-xl p-4 font-semibold'>
-            <span>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                className='w-6 h-6'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
-                />
-              </svg>
-            </span>
-            <span>Welcome back!</span>
-          </div>
-        ) : null}
+        <Button text='Login' />
       </form>
     </div>
   );
