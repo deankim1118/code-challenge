@@ -1,25 +1,37 @@
-import Button from '@/components/button';
-import LoginForm from '@/components/loginForm';
-import Link from 'next/link';
+import db from '@/lib/db';
+import { Prisma } from '@prisma/client';
+import TweetList from '@/components/tweet-list';
 
-export default function Home() {
+async function getInitialTweets() {
+  const Tweets = await db.tweet.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      created_at: true,
+      user: {
+        select: {
+          username: true,
+        },
+      },
+    },
+    take: 1,
+    orderBy: {
+      created_at: 'desc',
+    },
+  });
+  return Tweets;
+}
+
+export type initialTweetsType = Prisma.PromiseReturnType<
+  typeof getInitialTweets
+>;
+
+export default async function Home() {
+  const initialTweets = await getInitialTweets();
   return (
     <main className='h-screen w-screen flex items-center justify-center'>
-      <div className='flex flex-col items-center gap-3 w-[200px]'>
-        <h1 className='text-6xl'>🔥</h1>
-        <Link
-          href='/create-account'
-          className='primary-btn py-2.5 text-lg w-full'
-        >
-          <Button text='Create Account' disabled={false} />
-        </Link>
-        <Link
-          href='/login'
-          className=' hover:underline underline-offset-4 w-full'
-        >
-          <Button text='Login' disabled={false} />
-        </Link>
-      </div>
+      <TweetList initialTweets={initialTweets} />
     </main>
   );
 }

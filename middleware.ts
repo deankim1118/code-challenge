@@ -6,7 +6,7 @@ interface IRoutes {
 }
 
 const publicOnlyUrls: IRoutes = {
-  '/': true,
+  '/account': true,
   '/login': true,
   '/create-account': true,
 };
@@ -16,11 +16,11 @@ export async function middleware(request: NextRequest) {
   const exists = publicOnlyUrls[request.nextUrl.pathname];
   if (!session.id) {
     if (!exists) {
-      return Response.redirect(new URL('/', request.url));
+      return Response.redirect(new URL('/account', request.url));
     }
   } else {
     if (exists) {
-      return Response.redirect(new URL('/profile', request.url));
+      return Response.redirect(new URL('/', request.url));
     }
   }
 }
