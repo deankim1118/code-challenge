@@ -34,7 +34,8 @@ export default async function TweetsDetail({
   }
 
   return (
-    <div className='flex w-screen h-screen justify-center p-20'>
+    <div className='flex flex-col w-screen h-screen justify-start items-center gap-4'>
+      <h1 className=''>Tweets</h1>
       <div className='flex flex-col w-full max-w-screen-sm h-min gap-4 rounded-md ring-1 p-4 ring-orange-400'>
         <div className='flex justify-between *:text-sm'>
           <span className='uppercase font-semibold'>{tweet.user.username}</span>

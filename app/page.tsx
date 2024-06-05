@@ -1,6 +1,7 @@
 import db from '@/lib/db';
 import { Prisma } from '@prisma/client';
 import TweetList from '@/components/tweet-list';
+import NavBar from '@/components/navBar';
 
 async function getInitialTweets() {
   const Tweets = await db.tweet.findMany({
@@ -30,8 +31,9 @@ export type initialTweetsType = Prisma.PromiseReturnType<
 export default async function Home() {
   const initialTweets = await getInitialTweets();
   return (
-    <main className='h-screen w-screen flex items-center justify-center'>
+    <>
+      <NavBar />
       <TweetList initialTweets={initialTweets} />
-    </main>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { initialTweetsType } from '@/app/page';
-import { getMoreTweets } from '@/app/tweets/[id]/action';
+import { getMoreTweets } from '@/app/(nav)/tweets/[id]/action';
 import { formatTimeAgo } from '@/lib/utils';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
